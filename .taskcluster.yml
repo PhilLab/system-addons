@@ -11,7 +11,7 @@ tasks:
   - provisionerId: "{{ taskcluster.docker.provisionerId }}"
   # Worker types correspond to particular machine types (aws size, etc...)
   # worker types may be added by priveleged taskcluster users at tools.taskcluster.net/aws-provisioner
-    workerType: "{{ taskcluster.docker.workerType }}"
+    workerType: "opt-linux64"
     extra:
       github:
         # This must be set in order access GitHub info from inside your environment
