@@ -28,6 +28,8 @@ tasks:
     payload:
       maxRunTime: 3600                            # Job timeout, in seconds
       image: "taskcluster/desktop-build:0.1.3"    # Our docker container (if using docker)
+      env:
+        MOZHARNESS_SCRIPT: 'mozharness/scripts/fx_desktop_build.py'
       cache:
         tc-vcs: '/home/worker/.tc-vcs'
         tooltool-cache: '/home/worker/tooltool-cache'
