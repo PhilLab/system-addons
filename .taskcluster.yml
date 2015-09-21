@@ -30,6 +30,7 @@ tasks:
       image: "taskcluster/desktop-build:0.1.3"    # Our docker container (if using docker)
       env:
         MOZHARNESS_SCRIPT: 'mozharness/scripts/fx_desktop_build.py'
+        MOZHARNESS_CONFIG: 'builds/releng_base_linux_64_builds.py balrog/docker-worker.py'
       cache:
         tc-vcs: '/home/worker/.tc-vcs'
         tooltool-cache: '/home/worker/tooltool-cache'
@@ -39,7 +40,7 @@ tasks:
         - "-c"
         # FIXME support checkout-pull-request bash function in the desktop-build image
         #- "checkout-pull-request && ./mach build"
-        - "git clone https://github.com/mozilla/system-addons && cd system-addons && ../bin/build.sh"
+        - "./bin/build.sh"
     # Each task also requires explicit metadata
     metadata:
       name: "TaskCluster GitHub Tests"
