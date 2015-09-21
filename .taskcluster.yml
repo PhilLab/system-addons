@@ -21,6 +21,9 @@ tasks:
           - pull_request.opened
           - pull_request.synchronize
           - pull_request.reopened
+    scopes:
+      - 'docker-worker:cache:tc-vcs'
+
     payload:
       maxRunTime: 3600                            # Job timeout, in seconds
       image: "taskcluster/desktop-build:0.1.3"    # Our docker container (if using docker)
