@@ -26,7 +26,7 @@ tasks:
       - 'docker-worker:cache:tooltool-cache'
 
     payload:
-      maxRunTime: 3600                            # Job timeout, in seconds
+      maxRunTime: 10800                           # Job timeout, in seconds
       image: "taskcluster/desktop-build:0.1.3"    # Our docker container (if using docker)
       env:
         MOZHARNESS_SCRIPT: 'mozharness/scripts/fx_desktop_build.py'
