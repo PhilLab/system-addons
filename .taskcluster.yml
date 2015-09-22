@@ -2,7 +2,7 @@
 version: 0
 # Top level metadata is always required
 metadata:
-  name: "System Add-ons Prototyping"
+  name: "TaskCluster GitHub Tests"
   description: "All non-integration tests for taskcluster github"
   owner: "{{ event.head.user.email }}" # the user who sent the pr/push e-mail will be inserted here
   source: "{{ event.head.repo.url }}"  # the repo where the pr came from will be inserted here
@@ -40,7 +40,7 @@ tasks:
         - "-c"
         # FIXME support checkout-pull-request bash function in the desktop-build image
         #- "checkout-pull-request && ./mach build"
-        - "./bin/build.sh"
+        - "git clone $GITHUB_HEAD_REPO && git checkout $GITHUB_HEAD_BRANCH && testing/docker/desktop-build/bin/build.sh"
     # Each task also requires explicit metadata
     metadata:
       name: "TaskCluster GitHub Tests"
