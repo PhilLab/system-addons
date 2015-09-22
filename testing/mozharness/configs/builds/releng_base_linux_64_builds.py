@@ -14,11 +14,11 @@ config = {
         'checkout-sources',
         'setup-mock',
         'build',
-        'upload-files',
+        #'upload-files',
         'sendchange',
         'check-test',
         'generate-build-stats',
-        'update',  # decided by query_is_nightly()
+        #'update',  # decided by query_is_nightly()
     ],
     "buildbot_json_path": "buildprops.json",
     'exes': {
