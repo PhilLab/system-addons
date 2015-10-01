@@ -169,7 +169,7 @@ class MachCommands(MachCommandBase):
     @CommandArgument('-s', '--setup', default=False, action='store_true',
         help='configure eslint for optimal development.')
     @CommandArgument('path', nargs='?', default='.',
-        help='Path to files to lint, like "browser/components/loop" '
+        help='Path to files to lint, like "browser/extensions/loop" '
             'or "mobile/android". '
             'Defaults to the current directory if not given.')
     @CommandArgument('-e', '--ext', default='[.js,.jsm,.jsx]',

@@ -110,12 +110,12 @@ static RedirEntry kRedirMap[] = {
   {
     "debugging", "chrome://devtools/content/aboutdebugging/aboutdebugging.xhtml",
     nsIAboutModule::ALLOW_SCRIPT },
-  { "loopconversation", "chrome://browser/content/loop/conversation.html",
+  { "loopconversation", "chrome://loop/content/conversation.html",
     nsIAboutModule::URI_SAFE_FOR_UNTRUSTED_CONTENT |
     nsIAboutModule::ALLOW_SCRIPT |
     nsIAboutModule::HIDE_FROM_ABOUTABOUT |
     nsIAboutModule::ENABLE_INDEXED_DB },
-  { "looppanel", "chrome://browser/content/loop/panel.html",
+  { "looppanel", "chrome://loop/content/panel.html",
     nsIAboutModule::URI_SAFE_FOR_UNTRUSTED_CONTENT |
     nsIAboutModule::ALLOW_SCRIPT |
     nsIAboutModule::HIDE_FROM_ABOUTABOUT |

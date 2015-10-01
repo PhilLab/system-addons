@@ -99,7 +99,7 @@ else:
 # parse the CLI arguments
 description = 'Loop build tool for JSX files. ' + \
               'Will scan entire loop directory and compile them in place. ' + \
-              'Must be executed from browser/components/loop directory.'
+              'Must be executed from browser/extensions/loop directory.'
 
 parser = argparse.ArgumentParser(description=description)
 parser.add_argument('--watch', '-w', action='store_true', help='continuous' +

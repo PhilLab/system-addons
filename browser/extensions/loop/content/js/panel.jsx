@@ -29,7 +29,7 @@ loop.panel = (function(_, mozL10n) {
       return (
         <div className="fte-get-started-content">
           <header className="fte-title">
-            <img src="loop/shared/img/hello_logo.svg" />
+            <img src="shared/img/hello_logo.svg" />
             <div className="fte-subheader">
               {mozL10n.get("first_time_experience_subheading")}
             </div>
@@ -379,7 +379,7 @@ loop.panel = (function(_, mozL10n) {
     _renderDefaultIcon: function() {
       return (
         <div className="room-entry-context-item">
-          <img src="loop/shared/img/icons-16x16.svg#globe" />
+          <img src="shared/img/icons-16x16.svg#globe" />
         </div>
       );
     },
@@ -390,7 +390,7 @@ loop.panel = (function(_, mozL10n) {
           <a href={roomUrl.location}
             onClick={this.handleClick}
             title={roomUrl.description}>
-            <img src={roomUrl.thumbnail || "loop/shared/img/icons-16x16.svg#globe"} />
+            <img src={roomUrl.thumbnail || "shared/img/icons-16x16.svg#globe"} />
           </a>
         </div>
       );
@@ -708,7 +708,7 @@ loop.panel = (function(_, mozL10n) {
         <div className="room-list">
           {this._renderNewRoomButton()}
           <div className="room-list-loading">
-            <img src="loop/shared/img/animated-spinner.svg" />
+            <img src="shared/img/animated-spinner.svg" />
           </div>
         </div>
       );

@@ -12,11 +12,11 @@ Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/Http.jsm");
 Cu.import("resource://testing-common/httpd.js");
-Cu.import("resource:///modules/loop/MozLoopService.jsm");
+Cu.import("resource://loop/modules/MozLoopService.jsm");
 Cu.import("resource://gre/modules/Promise.jsm");
-Cu.import("resource:///modules/loop/LoopRooms.jsm");
+Cu.import("resource://loop/modules/LoopRooms.jsm");
 Cu.import("resource://gre/modules/osfile.jsm");
-const { MozLoopServiceInternal } = Cu.import("resource:///modules/loop/MozLoopService.jsm", {});
+const { MozLoopServiceInternal } = Cu.import("resource://loop/modules/MozLoopService.jsm", {});
 const { LoopRoomsInternal, timerHandlers } = Cu.import("resource:///modules/loop/LoopRooms.jsm", {});
 
 XPCOMUtils.defineLazyModuleGetter(this, "MozLoopPushHandler",

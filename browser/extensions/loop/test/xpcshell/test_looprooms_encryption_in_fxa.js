@@ -7,7 +7,7 @@
 timerHandlers.startTimer = callback => callback();
 
 Cu.import("resource://services-common/utils.js");
-const { LOOP_ROOMS_CACHE_FILENAME } = Cu.import("resource:///modules/loop/LoopRoomsCache.jsm", {});
+const { LOOP_ROOMS_CACHE_FILENAME } = Cu.import("resource://loop/modules/LoopRoomsCache.jsm", {});
 
 const kContextEnabledPref = "loop.contextInConverations.enabled";
 

@@ -10,7 +10,7 @@ Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/Task.jsm");
 Cu.import("resource://gre/modules/Timer.jsm");
 
-const { MozLoopService, LOOP_SESSION_TYPE } = Cu.import("resource:///modules/loop/MozLoopService.jsm", {});
+const { MozLoopService, LOOP_SESSION_TYPE } = Cu.import("resource://loop/modules/MozLoopService.jsm", {});
 XPCOMUtils.defineLazyModuleGetter(this, "Promise",
                                   "resource://gre/modules/Promise.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "CommonUtils",
@@ -23,15 +23,15 @@ XPCOMUtils.defineLazyGetter(this, "eventEmitter", function() {
   return new EventEmitter();
 });
 XPCOMUtils.defineLazyGetter(this, "gLoopBundle", function() {
-  return Services.strings.createBundle("chrome://browser/locale/loop/loop.properties");
+  return Services.strings.createBundle("chrome://loop/locale/loop.properties");
 });
 
 XPCOMUtils.defineLazyModuleGetter(this, "LoopRoomsCache",
-  "resource:///modules/loop/LoopRoomsCache.jsm");
+  "resource://loop/modules/LoopRoomsCache.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "loopUtils",
-  "resource:///modules/loop/utils.js", "utils");
+  "resource://loop/modules/utils.js", "utils");
 XPCOMUtils.defineLazyModuleGetter(this, "loopCrypto",
-  "resource:///modules/loop/crypto.js", "LoopCrypto");
+  "resource://loop/modules/crypto.js", "LoopCrypto");
 XPCOMUtils.defineLazyModuleGetter(this, "ObjectUtils",
   "resource://gre/modules/ObjectUtils.jsm");
 
