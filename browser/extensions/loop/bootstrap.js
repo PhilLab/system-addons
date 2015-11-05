@@ -36,7 +36,7 @@ var WindowListener = {
       const kNSXUL = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
       const kBrowserSharingNotificationId = "loop-sharing-notification";
       const kPrefBrowserSharingInfoBar = "browserSharing.showInfoBar";
-    
+
       LoopUI = {
         /**
          * @var {XULWidgetSingleWrapper} toolbarButton Getter for the Loop toolbarbutton
@@ -46,7 +46,7 @@ var WindowListener = {
           delete this.toolbarButton;
           return this.toolbarButton = CustomizableUI.getWidget("loop-button").forWindow(window);
         },
-    
+
         /**
          * @var {XULElement} panel Getter for the Loop panel element.
          */
@@ -54,7 +54,7 @@ var WindowListener = {
           delete this.panel;
           return this.panel = document.getElementById("loop-notification-panel");
         },
-    
+
         /**
          * @var {XULElement|null} browser Getter for the Loop panel browser element.
          *                                Will be NULL if the panel hasn't loaded yet.
@@ -67,7 +67,7 @@ var WindowListener = {
           }
           return browser;
         },
-    
+
         /**
          * @var {String|null} selectedTab Getter for the name of the currently selected
          *                                tab inside the Loop panel. Will be NULL if
@@ -77,11 +77,11 @@ var WindowListener = {
           if (!this.browser) {
             return null;
           }
-    
+
           let selectedTab = this.browser.contentDocument.querySelector(".tab-view > .selected");
           return selectedTab && selectedTab.getAttribute("data-tab-name");
         },
-    
+
         /**
          * @return {Promise}
          */
@@ -89,7 +89,7 @@ var WindowListener = {
           if (!aDocument.hidden) {
             return Promise.resolve(aDocument);
           }
-    
+
           return new Promise((resolve) => {
             aDocument.addEventListener("visibilitychange", function onVisibilityChanged() {
               aDocument.removeEventListener("visibilitychange", onVisibilityChanged);
@@ -97,7 +97,7 @@ var WindowListener = {
             });
           });
         },
-    
+
         /**
          * Toggle between opening or hiding the Loop panel.
          *
@@ -123,7 +123,7 @@ var WindowListener = {
               resolve();
             });
           }
-    
+
           return this.openCallPanel(event, tabId).then(doc => {
             let fm = Services.focus;
             fm.moveFocus(doc.defaultView, null, fm.MOVEFOCUS_FIRST, fm.FLAG_NOSCROLL);
@@ -131,7 +131,7 @@ var WindowListener = {
             Cu.reportError(x);
           });
         },
-    
+
         /**
          * Opens the panel for Loop and sizes it appropriately.
          *
@@ -150,7 +150,7 @@ var WindowListener = {
                   resolve(LoopUI.promiseDocumentVisible(iframe.contentDocument));
                   return;
                 }
-    
+
                 let win = iframe.contentWindow;
                 let ev = new win.CustomEvent("UIAction", Cu.cloneInto({
                   detail: {
@@ -161,14 +161,14 @@ var WindowListener = {
                 win.dispatchEvent(ev);
                 resolve(LoopUI.promiseDocumentVisible(iframe.contentDocument));
               }
-    
+
               // If the panel has been opened and initialized before, we can skip waiting
               // for the content to load - because it's already there.
               if (("contentWindow" in iframe) && iframe.contentWindow.document.readyState == "complete") {
                 showTab();
                 return;
               }
-    
+
               let documentDOMLoaded = () => {
                 iframe.removeEventListener("DOMContentLoaded", documentDOMLoaded, true);
                 this.injectLoopAPI(iframe.contentWindow);
@@ -180,10 +180,10 @@ var WindowListener = {
               };
               iframe.addEventListener("DOMContentLoaded", documentDOMLoaded, true);
             };
-    
+
             // Used to clear the temporary "login" state from the button.
             Services.obs.notifyObservers(null, "loop-status-changed", null);
-    
+
             this.shouldResumeTour().then((resume) => {
               if (resume) {
                 // Assume the conversation with the visitor wasn't open since we would
@@ -193,9 +193,9 @@ var WindowListener = {
                 resolve();
                 return;
               }
-    
+
               let anchor = event ? event.target : this.toolbarButton.anchor;
-    
+
               this.PanelFrame.showPopup(window, anchor,
                 "loop", null, "about:looppanel",
                 // Loop wants a fixed size for the panel. This also stops it dynamically resizing.
@@ -204,7 +204,7 @@ var WindowListener = {
             });
           });
         },
-    
+
         /**
          * Method to know whether actions to open the panel should instead resume the tour.
          *
@@ -219,21 +219,21 @@ var WindowListener = {
           if (!Services.prefs.getBoolPref("loop.gettingStarted.resumeOnFirstJoin")) {
             return false;
           }
-    
+
           if (!this.LoopRooms.participantsCount) {
             // Nobody is in the rooms
             return false;
           }
-    
+
           let roomsWithNonOwners = yield this.roomsWithNonOwners();
           if (!roomsWithNonOwners.length) {
             // We were the only one in a room but we want to know about someone else joining.
             return false;
           }
-    
+
           return true;
         }),
-    
+
         /**
          * @return {Promise} resolved with an array of Rooms with participants (excluding owners)
          */
@@ -255,7 +255,7 @@ var WindowListener = {
             });
           });
         },
-    
+
         /**
          * Triggers the initialization of the loop service.  Called by
          * delayedStartup.
@@ -263,7 +263,7 @@ var WindowListener = {
         init: function() {
           // Add observer notifications before the service is initialized
           Services.obs.addObserver(this, "loop-status-changed", false);
-    
+
           // This is a promise for test purposes, but we don't want to be logging
           // expected errors to the console, so we catch them here.
           this.MozLoopService.initialize().catch(ex => {
@@ -275,11 +275,11 @@ var WindowListener = {
           });
           this.updateToolbarState();
         },
-    
+
         uninit: function() {
           Services.obs.removeObserver(this, "loop-status-changed");
         },
-    
+
         // Implements nsIObserver
         observe: function(subject, topic, data) {
           if (topic != "loop-status-changed") {
@@ -287,7 +287,7 @@ var WindowListener = {
           }
           this.updateToolbarState(data);
         },
-    
+
         /**
          * Updates the toolbar/menu-button state to reflect Loop status.
          *
@@ -325,7 +325,7 @@ var WindowListener = {
               } else {
                 mozL10nId += "-active";
               }
-    
+
               this.updateTooltiptext(mozL10nId + suffix);
               this.toolbarButton.node.setAttribute("state", state);
             });
@@ -334,7 +334,7 @@ var WindowListener = {
           this.toolbarButton.node.setAttribute("state", state);
           this.updateTooltiptext(mozL10nId + suffix);
         },
-    
+
         /**
          * Updates the tootltiptext to reflect Loop status.
          *
@@ -346,7 +346,7 @@ var WindowListener = {
           var tooltiptext = CustomizableUI.getLocalizedProperty(this.toolbarButton, "tooltiptext");
           this.toolbarButton.node.setAttribute("tooltiptext", tooltiptext);
         },
-    
+
         /**
          * Show a desktop notification when 'do not disturb' isn't enabled.
          *
@@ -367,11 +367,11 @@ var WindowListener = {
           if (this.MozLoopService.doNotDisturb) {
             return;
           }
-    
+
           if (!options.title) {
             throw new Error("Missing title, can not display notification");
           }
-    
+
           let notificationOptions = {
             body: options.message || ""
           };
@@ -385,17 +385,17 @@ var WindowListener = {
             };
             this.playSound(options.sound);
           }
-    
+
           let notification = new window.Notification(options.title, notificationOptions);
           notification.addEventListener("click", e => {
             if (window.closed) {
               return;
             }
-    
+
             try {
               window.focus();
             } catch (ex) {}
-    
+
             // We need a setTimeout here, otherwise the panel won't show after the
             // window received focus.
             window.setTimeout(() => {
@@ -408,7 +408,7 @@ var WindowListener = {
             }, 0);
           });
         },
-    
+
         /**
          * Play a sound in this window IF there's no sound playing yet.
          *
@@ -418,15 +418,15 @@ var WindowListener = {
           if (this.ActiveSound || this.MozLoopService.doNotDisturb) {
             return;
           }
-    
+
           this.activeSound = new window.Audio();
           this.activeSound.src = `chrome://loop/content/shared/sounds/${name}.ogg`;
           this.activeSound.load();
           this.activeSound.play();
-    
+
           this.activeSound.addEventListener("ended", () => this.activeSound = undefined, false);
         },
-    
+
         /**
          * Adds a listener for browser sharing. It will inform the listener straight
          * away for the current windowId, and then on every tab change.
@@ -443,14 +443,14 @@ var WindowListener = {
             this._tabChangeListeners = new Set();
             gBrowser.tabContainer.addEventListener("TabSelect", this);
           }
-    
+
           this._tabChangeListeners.add(listener);
           this._maybeShowBrowserSharingInfoBar();
-    
+
           // Get the first window Id for the listener.
           listener(null, gBrowser.selectedBrowser.outerWindowID);
         },
-    
+
         /**
          * Removes a listener from browser sharing.
          *
@@ -460,18 +460,18 @@ var WindowListener = {
           if (!this._tabChangeListeners) {
             return;
           }
-    
+
           if (this._tabChangeListeners.has(listener)) {
             this._tabChangeListeners.delete(listener);
           }
-    
+
           if (!this._tabChangeListeners.size) {
             this._hideBrowserSharingInfoBar();
             gBrowser.tabContainer.removeEventListener("TabSelect", this);
             delete this._tabChangeListeners;
           }
         },
-    
+
         /**
          * Helper function to fetch a localized string via the MozLoopService API.
          * It's currently inconveniently wrapped inside a string of stringified JSON.
@@ -486,7 +486,7 @@ var WindowListener = {
           }
           return str;
         },
-    
+
         /**
          * Shows an infobar notification at the top of the browser window that warns
          * the user that their browser tabs are being broadcasted through the current
@@ -494,12 +494,12 @@ var WindowListener = {
          */
         _maybeShowBrowserSharingInfoBar: function() {
           this._hideBrowserSharingInfoBar();
-    
+
           // Don't show the infobar if it's been permanently disabled from the menu.
           if (!this.MozLoopService.getLoopPref(kPrefBrowserSharingInfoBar)) {
             return;
           }
-    
+
           // Create the menu that is shown when the menu-button' dropmarker is clicked
           // inside the notification bar.
           let menuPopup = document.createElementNS(kNSXUL, "menupopup");
@@ -510,7 +510,7 @@ var WindowListener = {
             // We're being told to hide the bar permanently.
             this._hideBrowserSharingInfoBar(true);
           });
-    
+
           let box = gBrowser.getNotificationBox();
           let bar = box.appendNotification(
             this._getString("infobar_screenshare_browser_message"),
@@ -529,11 +529,11 @@ var WindowListener = {
               }
             }]
           );
-    
+
           // Keep showing the notification bar until the user explicitly closes it.
           bar.persistence = -1;
         },
-    
+
         /**
          * Hides the infobar, permanantly if requested.
          *
@@ -550,14 +550,14 @@ var WindowListener = {
             box.removeNotification(notification);
             removed = true;
           }
-    
+
           if (permanently) {
             this.MozLoopService.setLoopPref(kPrefBrowserSharingInfoBar, false);
           }
-    
+
           return removed;
         },
-    
+
         /**
          * Handles events from gBrowser.
          */
@@ -566,13 +566,13 @@ var WindowListener = {
           if (event.type != "TabSelect") {
             return;
           }
-    
+
           let wasVisible = false;
           // Hide the infobar from the previous tab.
           if (event.detail.previousTab) {
             wasVisible = this._hideBrowserSharingInfoBar(false, event.detail.previousTab.linkedBrowser);
           }
-    
+
           // We've changed the tab, so get the new window id.
           for (let listener of this._tabChangeListeners) {
             try {
@@ -581,14 +581,14 @@ var WindowListener = {
               Cu.reportError("Tab switch caused an error: " + ex.message);
             }
           };
-    
+
           if (wasVisible) {
             // If the infobar was visible before, we should show it again after the
             // switch.
             this._maybeShowBrowserSharingInfoBar();
           }
         },
-    
+
         /**
          * Fetch the favicon of the currently selected tab in the format of a data-uri.
          *
@@ -604,7 +604,7 @@ var WindowListener = {
             callback();
             return;
           }
-    
+
           this.PlacesUtils.promiseFaviconLinkUrl(pageURI).then(uri => {
             // We XHR the favicon to get a File object, which we can pass to the FileReader
             // object. The FileReader turns the File object into a data-uri.
@@ -617,7 +617,7 @@ var WindowListener = {
                 callback(new Error("Invalid status code received for favicon XHR: " + xhr.status));
                 return;
               }
-    
+
               let reader = new FileReader();
               reader.onload = reader.onload = () => callback(null, reader.result);
               reader.onerror = callback;
@@ -631,7 +631,7 @@ var WindowListener = {
         }
       };
     })();
-    
+
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "injectLoopAPI", "resource:///modules/loop/MozLoopAPI.jsm");
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "LoopRooms", "resource:///modules/loop/LoopRooms.jsm");
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "MozLoopService", "resource:///modules/loop/MozLoopService.jsm");
@@ -640,7 +640,7 @@ var WindowListener = {
 
     LoopUI.init(); 
     document.defaultView.LoopUI = LoopUI;
-    
+
   },
 
   tearDownBrowserUI: function(window) {
