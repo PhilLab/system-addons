@@ -608,7 +608,7 @@ var WindowListener = {
           this.PlacesUtils.promiseFaviconLinkUrl(pageURI).then(uri => {
             // We XHR the favicon to get a File object, which we can pass to the FileReader
             // object. The FileReader turns the File object into a data-uri.
-            let xhr = new XMLHttpRequest();
+            let xhr = xhrClass.createInstance(Ci.nsIXMLHttpRequest);
             xhr.open("get", uri.spec, true);
             xhr.responseType = "blob";
             xhr.overrideMimeType("image/x-icon");
