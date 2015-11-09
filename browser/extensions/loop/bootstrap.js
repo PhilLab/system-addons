@@ -681,7 +681,7 @@ function startup(data, reason)
   CustomizableUI.createWidget({
     id: "loop-button",
     type: "custom",
-    label: "loop-call-button3.label",
+    //label: "loop-call-button3.label",
     //tooltiptext: "loop-call-button3.tooltiptext2",
     privateBrowsingTooltiptext: "loop-call-button3-pb.tooltiptext",
     defaultArea: CustomizableUI.AREA_NAVBAR,
