@@ -632,9 +632,9 @@ var WindowListener = {
       };
     })();
 
-    XPCOMUtils.defineLazyModuleGetter(LoopUI, "injectLoopAPI", "resource://loop/modules/MozLoopAPI.jsm");
-    XPCOMUtils.defineLazyModuleGetter(LoopUI, "LoopRooms", "resource://loop/modules/LoopRooms.jsm");
-    XPCOMUtils.defineLazyModuleGetter(LoopUI, "MozLoopService", "resource://loop/modules/MozLoopService.jsm");
+    XPCOMUtils.defineLazyModuleGetter(LoopUI, "injectLoopAPI", "chrome://loop/content/modules/MozLoopAPI.jsm");
+    XPCOMUtils.defineLazyModuleGetter(LoopUI, "LoopRooms", "chrome://loop/content/modules/LoopRooms.jsm");
+    XPCOMUtils.defineLazyModuleGetter(LoopUI, "MozLoopService", "chrome://loop/content/modules/MozLoopService.jsm");
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "PanelFrame", "resource:///modules/PanelFrame.jsm");
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 
