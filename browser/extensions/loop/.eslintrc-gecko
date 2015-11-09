@@ -9,6 +9,7 @@
     "generators": true,
     "restParams": true,
     "spread": true,
+    "templateStrings": true,
     "objectLiteralShorthandMethods": true,
   },
   "globals": {
