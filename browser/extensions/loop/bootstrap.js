@@ -4,7 +4,7 @@
 
 "use strict";
 
-const {interfaces: Ci, manager: Cm, results: Cr, utils: Cu, classes: Cc} = Components;
+const { interfaces: Ci, manager: Cm, results: Cr, utils: Cu, classes: Cc } = Components;
 
 const kNSXUL = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 const kBrowserSharingNotificationId = "loop-sharing-notification";
@@ -33,10 +33,6 @@ var WindowListener = {
     var LoopUI;
 
     (function() {
-      const kNSXUL = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
-      const kBrowserSharingNotificationId = "loop-sharing-notification";
-      const kPrefBrowserSharingInfoBar = "browserSharing.showInfoBar";
-
       LoopUI = {
         /**
          * @var {XULWidgetSingleWrapper} toolbarButton Getter for the Loop toolbarbutton
@@ -44,7 +40,7 @@ var WindowListener = {
          */
         get toolbarButton() {
           delete this.toolbarButton;
-          return this.toolbarButton = CustomizableUI.getWidget("loop-button").forWindow(window);
+          return (this.toolbarButton = CustomizableUI.getWidget("loop-button").forWindow(window));
         },
 
         /**
@@ -52,7 +48,7 @@ var WindowListener = {
          */
         get panel() {
           delete this.panel;
-          return this.panel = document.getElementById("loop-notification-panel");
+          return (this.panel = document.getElementById("loop-notification-panel"));
         },
 
         /**
@@ -128,7 +124,7 @@ var WindowListener = {
             let fm = Services.focus;
             fm.moveFocus(doc.defaultView, null, fm.MOVEFOCUS_FIRST, fm.FLAG_NOSCROLL);
           }).catch(err => {
-            Cu.reportError(x);
+            Cu.reportError(err);
           });
         },
 
@@ -394,7 +390,9 @@ var WindowListener = {
 
             try {
               window.focus();
-            } catch (ex) {}
+            } catch (ex) {
+              // Do nothing
+            }
 
             // We need a setTimeout here, otherwise the panel won't show after the
             // window received focus.
@@ -580,7 +578,7 @@ var WindowListener = {
             } catch (ex) {
               Cu.reportError("Tab switch caused an error: " + ex.message);
             }
-          };
+          }
 
           if (wasVisible) {
             // If the infobar was visible before, we should show it again after the
@@ -638,7 +636,7 @@ var WindowListener = {
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "PanelFrame", "resource:///modules/PanelFrame.jsm");
     XPCOMUtils.defineLazyModuleGetter(LoopUI, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 
-    LoopUI.init(); 
+    LoopUI.init();
     document.defaultView.LoopUI = LoopUI;
 
   },
@@ -661,8 +659,9 @@ var WindowListener = {
       domWindow.removeEventListener("load", listener, false);
 
       // If this is a browser window then setup its UI
-      if (domWindow.document.documentElement.getAttribute("windowtype") == "navigator:browser")
+      if (domWindow.document.documentElement.getAttribute("windowtype") == "navigator:browser") {
         WindowListener.setupBrowserUI(domWindow);
+      }
     }, false);
   },
 
@@ -681,8 +680,8 @@ function startup(data, reason)
   CustomizableUI.createWidget({
     id: "loop-button",
     type: "custom",
-    //label: "loop-call-button3.label",
-    //tooltiptext: "loop-call-button3.tooltiptext2",
+    // FIXME: label: "loop-call-button3.label",
+    // FIXME: tooltiptext: "loop-call-button3.tooltiptext2",
     privateBrowsingTooltiptext: "loop-call-button3-pb.tooltiptext",
     defaultArea: CustomizableUI.AREA_NAVBAR,
     removable: true,
@@ -691,9 +690,9 @@ function startup(data, reason)
     onBuild: function(aDocument) {
       // FIXME - remove? could just disable add-on instead of using pref
       // If we're not supposed to see the button, return zip.
-      //if (!Services.prefs.getBoolPref("loop.enabled")) {
-      //  return null;
-      //}
+      // if (!Services.prefs.getBoolPref("loop.enabled")) {
+      //   return null;
+      // }
 
       let isWindowPrivate = PrivateBrowsingUtils.isWindowPrivate(aDocument.defaultView);
 
@@ -703,8 +702,9 @@ function startup(data, reason)
       node.classList.add("chromeclass-toolbar-additional");
       node.classList.add("badged-button");
       node.setAttribute("label", CustomizableUI.getLocalizedProperty(this, "label"));
-      if (isWindowPrivate)
+      if (isWindowPrivate) {
         node.setAttribute("disabled", "true");
+      }
       let tooltiptext = isWindowPrivate ?
         CustomizableUI.getLocalizedProperty(this, "privateBrowsingTooltiptext",
           [CustomizableUI.getLocalizedProperty(this, "label")]) :
@@ -719,8 +719,7 @@ function startup(data, reason)
     }
   });
   // attach to windows, for modifying UI
-  let wm = Cc["@mozilla.org/appshell/window-mediator;1"].
-           getService(Ci.nsIWindowMediator);
+  let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
   let windows = wm.getEnumerator("navigator:browser");
   while (windows.hasMoreElements()) {
     let domWindow = windows.getNext().QueryInterface(Ci.nsIDOMWindow);
@@ -740,8 +739,7 @@ function startup(data, reason)
 function shutdown(data, reason)
 {
   // attach to windows, for modifying UI
-  let wm = Cc["@mozilla.org/appshell/window-mediator;1"].
-           getService(Ci.nsIWindowMediator);
+  let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
   let windows = wm.getEnumerator("navigator:browser");
   while (windows.hasMoreElements()) {
     let domWindow = windows.getNext().QueryInterface(Ci.nsIDOMWindow);
