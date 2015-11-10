@@ -759,6 +759,12 @@ function shutdown(data, reason)
     styleSheetService.unregisterSheet(styleSheetURI, styleSheetService.USER_SHEET);
   }
 
+  // unload modules
+  Cu.unload("chrome://loop/content/modules/MozLoopAPI.jsm");
+  Cu.unload("chrome://loop/content/modules/LoopRooms.jsm");
+  Cu.unload("chrome://loop/content/modules/MozLoopService.jsm");
+
+
 }
 
 function install(data, reason) {}
