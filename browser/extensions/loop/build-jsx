@@ -74,7 +74,7 @@ def find_react_command():
     return [node, jsx_path]
 
 
-SHARED_LIBS_DIR=os.path.join(os.path.dirname(__file__), "content", "shared", "libs")
+SHARED_LIBS_DIR=os.path.join(os.path.dirname(__file__), "content", "shared", "vendor")
 REACT_VERSION=find_react_version(SHARED_LIBS_DIR)
 
 src_files = []  # files to be compiled
