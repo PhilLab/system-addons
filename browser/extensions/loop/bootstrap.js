@@ -718,7 +718,21 @@ function startup(data, reason)
       return node;
     }
   });
-  // attach to windows, for modifying UI
+
+  // Attach to hidden window (for os x).
+  try {
+    WindowListener.setupBrowserUI(Services.appShell.hiddenDOMWindow);
+  }
+  catch (ex) {
+    // Hidden window didn't exist, so wait until startup is done.
+    let topic = "browser-delayed-startup-finished";
+    Services.obs.addObserver(function observer() {
+      Services.obs.removeObserver(observer, topic);
+      WindowListener.setupBrowserUI(Services.appShell.hiddenDOMWindow);
+    }, topic, false);
+  }
+
+  // Attach to existing browser windows, for modifying UI
   let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
   let windows = wm.getEnumerator("navigator:browser");
   while (windows.hasMoreElements()) {
@@ -738,7 +752,10 @@ function startup(data, reason)
 
 function shutdown(data, reason)
 {
-  // attach to windows, for modifying UI
+  // Detach from hidden window (for os x).
+  WindowListener.tearDownBrowserUI(Services.appShell.hiddenDOMWindow);
+
+  // Detach from browser windows.
   let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
   let windows = wm.getEnumerator("navigator:browser");
   while (windows.hasMoreElements()) {
@@ -746,7 +763,7 @@ function shutdown(data, reason)
     WindowListener.tearDownBrowserUI(domWindow);
   }
 
-  // Wait for any new browser windows to open
+  // Stop waiting for browser windows to open.
   wm.removeListener(WindowListener);
 
   CustomizableUI.destroyWidget("loop-button");
