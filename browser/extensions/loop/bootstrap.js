@@ -111,7 +111,7 @@ var WindowListener = {
               win.LoopUI.togglePanel(event, tabId);
             };
             Services.obs.addObserver(obs, "browser-delayed-startup-finished", false);
-            return OpenBrowserWindow();
+            return window.OpenBrowserWindow();
           }
           if (this.panel.state == "open") {
             return new Promise(resolve => {
