@@ -787,8 +787,7 @@ describe("loop.shared.views", function() {
         allowClick: false,
         description: "test",
         dispatcher: dispatcher,
-        showContextTitle: false,
-        useDesktopPaths: false
+        showContextTitle: false
       }, extraProps);
       return TestUtils.renderIntoDocument(
         React.createElement(sharedViews.ContextUrlView, props));
@@ -831,16 +830,6 @@ describe("loop.shared.views", function() {
 
       expect(view.getDOMNode().querySelector(".context-preview").getAttribute("src"))
         .eql("shared/img/icons-16x16.svg#globe");
-    });
-
-    it("should use a default thumbnail for desktop if one is not supplied", function() {
-      view = mountTestComponent({
-        useDesktopPaths: true,
-        url: "http://wonderful.invalid"
-      });
-
-      expect(view.getDOMNode().querySelector(".context-preview").getAttribute("src"))
-        .eql("loop/shared/img/icons-16x16.svg#globe");
     });
 
     it("should not display a title if by default", function() {

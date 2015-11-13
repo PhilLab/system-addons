@@ -813,8 +813,6 @@ loop.shared.views = (function(_, mozL10n) {
    *                                        shown.
    * @property {String}  url                The url to be displayed. If not present or invalid,
    *                                        then this view won't be displayed.
-   * @property {Boolean} useDesktopPaths    Whether or not to use the desktop paths for for the
-   *                                        fallback url.
    */
   var ContextUrlView = React.createClass({
     mixins: [React.addons.PureRenderMixin],
@@ -824,8 +822,7 @@ loop.shared.views = (function(_, mozL10n) {
       description: React.PropTypes.string.isRequired,
       dispatcher: React.PropTypes.instanceOf(loop.Dispatcher),
       thumbnail: React.PropTypes.string,
-      url: React.PropTypes.string,
-      useDesktopPaths: React.PropTypes.bool.isRequired
+      url: React.PropTypes.string
     },
 
     /**
@@ -853,9 +850,7 @@ loop.shared.views = (function(_, mozL10n) {
       var thumbnail = this.props.thumbnail;
 
       if (!thumbnail) {
-        thumbnail = this.props.useDesktopPaths ?
-          "resource://loop/content/shared/img/icons-16x16.svg#globe" :
-          "shared/img/icons-16x16.svg#globe";
+        thumbnail = "shared/img/icons-16x16.svg#globe";
       }
 
       var wrapperClasses = classNames({
@@ -1015,8 +1010,7 @@ loop.shared.views = (function(_, mozL10n) {
       renderRemoteVideo: React.PropTypes.bool.isRequired,
       screenShareMediaElement: React.PropTypes.object,
       screenSharePosterUrl: React.PropTypes.string,
-      showInitialContext: React.PropTypes.bool.isRequired,
-      useDesktopPaths: React.PropTypes.bool.isRequired
+      showInitialContext: React.PropTypes.bool.isRequired
     },
 
     isLocalMediaAbsolutelyPositioned: function(matchMedia) {
@@ -1119,8 +1113,7 @@ loop.shared.views = (function(_, mozL10n) {
             </div>
             <loop.shared.views.chat.TextChatView
               dispatcher={this.props.dispatcher}
-              showInitialContext={this.props.showInitialContext}
-              useDesktopPaths={this.props.useDesktopPaths} />
+              showInitialContext={this.props.showInitialContext} />
             {this.state.localMediaAboslutelyPositioned ?
               null : this.renderLocalVideo()}
           </div>

@@ -47,8 +47,7 @@ describe("loop.shared.views.TextChatView", function() {
       var basicProps = {
         dispatcher: dispatcher,
         messageList: [],
-        showInitialContext: true,
-        useDesktopPaths: false
+        showInitialContext: true
       };
 
       return TestUtils.renderIntoDocument(
@@ -60,8 +59,7 @@ describe("loop.shared.views.TextChatView", function() {
       var basicProps = {
         dispatcher: dispatcher,
         messageList: [],
-        showInitialContext: true,
-        useDesktopPaths: false
+        showInitialContext: true
       };
 
       return React.render(
@@ -399,8 +397,7 @@ describe("loop.shared.views.TextChatView", function() {
     function mountTestComponent(extraProps) {
       var props = _.extend({
         dispatcher: dispatcher,
-        showInitialContext: true,
-        useDesktopPaths: false,
+        showInitialContext: true
         showAlways: true
       }, extraProps);
       return TestUtils.renderIntoDocument(

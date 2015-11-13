@@ -108,8 +108,7 @@ loop.shared.views.chat = (function(mozL10n) {
     propTypes: {
       dispatcher: React.PropTypes.instanceOf(loop.Dispatcher).isRequired,
       messageList: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-      showInitialContext: React.PropTypes.bool.isRequired,
-      useDesktopPaths: React.PropTypes.bool.isRequired
+      showInitialContext: React.PropTypes.bool.isRequired
     },
 
     getInitialState: function() {
@@ -193,8 +192,7 @@ loop.shared.views.chat = (function(mozL10n) {
                             description: entry.message, 
                             dispatcher: this.props.dispatcher, 
                             thumbnail: entry.extraData.thumbnail, 
-                            url: entry.extraData.location, 
-                            useDesktopPaths: this.props.useDesktopPaths})
+                            url: entry.extraData.location})
                         )
                       );
                     default:
@@ -371,8 +369,7 @@ loop.shared.views.chat = (function(mozL10n) {
 
     propTypes: {
       dispatcher: React.PropTypes.instanceOf(loop.Dispatcher).isRequired,
-      showInitialContext: React.PropTypes.bool.isRequired,
-      useDesktopPaths: React.PropTypes.bool.isRequired
+      showInitialContext: React.PropTypes.bool.isRequired
     },
 
     getInitialState: function() {
@@ -408,8 +405,7 @@ loop.shared.views.chat = (function(mozL10n) {
           React.createElement(TextChatEntriesView, {
             dispatcher: this.props.dispatcher, 
             messageList: messageList, 
-            showInitialContext: this.props.showInitialContext, 
-            useDesktopPaths: this.props.useDesktopPaths}), 
+            showInitialContext: this.props.showInitialContext}), 
           React.createElement(TextChatInputView, {
             dispatcher: this.props.dispatcher, 
             showPlaceholder: !hasSentMessages, 
