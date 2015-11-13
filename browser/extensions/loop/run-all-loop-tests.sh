@@ -33,7 +33,7 @@ if ! npm run-script build-coverage ; then
 fi
 )
 
-./mach xpcshell-test ${LOOPDIR}/
+#./mach xpcshell-test ${LOOPDIR}/
 ./mach marionette-test ${LOOPDIR}/manifest.ini
 
 # The browser_parsable_css.js can fail if we add some css that isn't parsable.

@@ -397,7 +397,7 @@ describe("loop.shared.views.TextChatView", function() {
     function mountTestComponent(extraProps) {
       var props = _.extend({
         dispatcher: dispatcher,
-        showInitialContext: true
+        showInitialContext: true,
         showAlways: true
       }, extraProps);
       return TestUtils.renderIntoDocument(
