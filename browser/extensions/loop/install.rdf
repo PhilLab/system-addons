@@ -17,9 +17,18 @@
       </Description>
     </em:targetApplication>
 
+    <!-- Used for unit tests only. -->
+    <em:targetApplication>
+      <Description>
+        <em:id>xpcshell@tests.mozilla.org</em:id>
+        <em:minVersion>0</em:minVersion>
+        <em:maxVersion>10</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
     <!-- Front End MetaData -->
-    <em:name>Loop</em:name>
-    <em:description>Video chat and screen sharing for Firefox.</em:description>
-    <em:creator>Mozilla (hello@mozilla.com)</em:creator>
+    <em:name>Firefox Hello</em:name>
+    <em:description>Web sharing for Firefox</em:description>
+    <em:creator>Mozilla</em:creator>
   </Description>
 </RDF>

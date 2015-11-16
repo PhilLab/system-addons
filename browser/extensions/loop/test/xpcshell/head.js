@@ -10,6 +10,43 @@ do_get_profile();
 
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
+
+// Setup the add-ons manager for this test.
+Cu.import("resource://gre/modules/FileUtils.jsm");
+
+function registerDirectory(aKey, aDir) {
+  var dirProvider = {
+    getFile: function(aProp, aPersistent) {
+      aPersistent.value = false;
+      if (aProp == aKey) {
+        return aDir.clone();
+      }
+      return null;
+    },
+
+    QueryInterface: XPCOMUtils.generateQI([Ci.nsIDirectoryServiceProvider,
+                                           Ci.nsISupports])
+  };
+  Services.dirsvc.registerProvider(dirProvider);
+}
+
+// As we're not running in application, we need to setup the features directory
+// manually.
+const distroDir = FileUtils.getDir("GreD", ["browser", "features"], true);
+registerDirectory("XREAppFeat", distroDir);
+
+// Set up application info - xpcshell doesn't have this by default.
+Cu.import("resource://testing-common/AppInfo.jsm");
+updateAppInfo();
+
+// Now trigger the addons-startup, and hence startup the manager itself. This
+// should load the manager correctly.
+var gInternalManager = Cc["@mozilla.org/addons/integration;1"]
+                    .getService(Ci.nsIObserver)
+                    .QueryInterface(Ci.nsITimerCallback);
+
+gInternalManager.observe(null, "addons-startup", null);
+
 Cu.import("resource://gre/modules/Http.jsm");
 Cu.import("resource://testing-common/httpd.js");
 Cu.import("chrome://loop/content/modules/MozLoopService.jsm");
@@ -17,10 +54,10 @@ Cu.import("resource://gre/modules/Promise.jsm");
 Cu.import("chrome://loop/content/modules/LoopRooms.jsm");
 Cu.import("resource://gre/modules/osfile.jsm");
 const { MozLoopServiceInternal } = Cu.import("chrome://loop/content/modules/MozLoopService.jsm", {});
-const { LoopRoomsInternal, timerHandlers } = Cu.import("resource:///modules/loop/LoopRooms.jsm", {});
+const { LoopRoomsInternal, timerHandlers } = Cu.import("chrome://loop/content/modules/LoopRooms.jsm", {});
 
 XPCOMUtils.defineLazyModuleGetter(this, "MozLoopPushHandler",
-                                  "resource:///modules/loop/MozLoopPushHandler.jsm");
+                                  "chrome://loop/content/modules/MozLoopPushHandler.jsm");
 
 const kMockWebSocketChannelName = "Mock WebSocket Channel";
 const kWebSocketChannelContractID = "@mozilla.org/network/protocol;1?name=wss";

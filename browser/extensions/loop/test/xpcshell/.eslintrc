@@ -19,6 +19,7 @@
     // head.js items.
     "MockWebSocketChannel": false,
     "extend": true,
+    "FileUtils": false,
     "getLoopString": false,
     "kServerPushUrl": true,
     "kEndPointUrl": true,
@@ -27,7 +28,8 @@
     "mockPushHandler": true,
     "setupFakeFxAUserProfile": false,
     "setupFakeLoopServer": false,
-    "timerHandlers",
+    "timerHandlers": false,
+    "updateAppInfo": false,
     "waitForCondition": true,
     // Loop specific items
     "MozLoopServiceInternal": true,
