@@ -741,6 +741,13 @@ function startup(data, reason)
 
 function shutdown(data, reason)
 {
+  // Close any open chat windows
+  Cu.import("resource:///modules/Chat.jsm");
+  let isLoopURL = ({ src }) => /^about:loopconversation#/.test(src);
+  [...Chat.chatboxes].filter(isLoopURL).forEach(chatbox => {
+    chatbox.content.contentWindow.close();
+  });
+
   // Detach from hidden window (for os x).
   WindowListener.tearDownBrowserUI(Services.appShell.hiddenDOMWindow);
 
