@@ -263,6 +263,10 @@ var WindowListener = {
           // Add observer notifications before the service is initialized
           Services.obs.addObserver(this, "loop-status-changed", false);
 
+          window.addEventListener("unload", () => {
+            this.uninit();
+          });
+
           // This is a promise for test purposes, but we don't want to be logging
           // expected errors to the console, so we catch them here.
           this.MozLoopService.initialize().catch(ex => {
@@ -276,6 +280,7 @@ var WindowListener = {
         },
 
         uninit: function() {
+          console.log("uninit!");
           Services.obs.removeObserver(this, "loop-status-changed");
         },
 
