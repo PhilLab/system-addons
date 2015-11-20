@@ -313,6 +313,7 @@ var WindowListener = {
           } else if (aReason == "login" && this.MozLoopService.userProfile) {
             state = "active";
             mozL10nId += "-active";
+            suffix += "2";
           } else if (this.MozLoopService.doNotDisturb) {
             state = "disabled";
             mozL10nId += "-donotdisturb";
@@ -325,11 +326,15 @@ var WindowListener = {
                 mozL10nId += "-active";
               }
 
+              suffix += "2";
               this.updateTooltiptext(mozL10nId + suffix);
               this.toolbarButton.node.setAttribute("state", state);
             });
             return;
+          } else {
+            suffix += "2";
           }
+
           this.toolbarButton.node.setAttribute("state", state);
           this.updateTooltiptext(mozL10nId + suffix);
         },
@@ -669,19 +674,18 @@ function startup(data, reason)
   CustomizableUI.createWidget({
     id: "loop-button",
     type: "custom",
-    // FIXME: label: "loop-call-button3.label",
-    // FIXME: tooltiptext: "loop-call-button3.tooltiptext2",
+    label: "loop-call-button3.label",
+    tooltiptext: "loop-call-button3.tooltiptext2",
     privateBrowsingTooltiptext: "loop-call-button3-pb.tooltiptext",
     defaultArea: CustomizableUI.AREA_NAVBAR,
     removable: true,
     label: "Loop",
     tooltiptext: "Video chat and screen sharing",
     onBuild: function(aDocument) {
-      // FIXME - remove? could just disable add-on instead of using pref
       // If we're not supposed to see the button, return zip.
-      // if (!Services.prefs.getBoolPref("loop.enabled")) {
-      //   return null;
-      // }
+      if (!Services.prefs.getBoolPref("loop.enabled")) {
+        return null;
+      }
 
       let isWindowPrivate = PrivateBrowsingUtils.isWindowPrivate(aDocument.defaultView);
 
