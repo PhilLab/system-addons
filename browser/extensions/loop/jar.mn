@@ -28,6 +28,7 @@
   skin/  (skin/*)
   content/modules/ (content/modules/*)
   content/modules/utils.js (content/shared/js/utils.js)
+* content/preferences/prefs.js (content/preferences/prefs.js)
   # Desktop html files
   content/panels/conversation.html            (content/panels/conversation.html)
   content/panels/panel.html                   (content/panels/panel.html)

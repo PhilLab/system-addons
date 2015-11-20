@@ -671,11 +671,29 @@ var WindowListener = {
   }
 };
 
-function startup(data, reason)
-{
+function loadDefaultPrefs() {
+  var branch = Services.prefs.getDefaultBranch("");
+  Services.scriptloader.loadSubScript("chrome://loop/content/preferences/prefs.js", {
+    pref: (key, val) => {
+      switch (typeof val) {
+        case "boolean":
+          branch.setBoolPref(key, val);
+          break;
+        case "number":
+          branch.setIntPref(key, val);
+          break;
+        case "string":
+          branch.setCharPref(key, val);
+          break;
+      }
+    }
+  });
+}
+
+function createLoopButton() {
   /**
-    * formerly in CustomizableUI.jsm
-    */
+  * formerly in CustomizableUI.jsm
+  */
   CustomizableUI.createWidget({
     id: "loop-button",
     type: "custom",
@@ -716,6 +734,13 @@ function startup(data, reason)
       return node;
     }
   });
+}
+
+function startup(data, reason)
+{
+  loadDefaultPrefs();
+
+  createLoopButton();
 
   // Attach to hidden window (for os x).
   try {
@@ -795,8 +820,6 @@ function shutdown(data, reason)
   Cu.unload("chrome://loop/content/modules/MozLoopAPI.jsm");
   Cu.unload("chrome://loop/content/modules/LoopRooms.jsm");
   Cu.unload("chrome://loop/content/modules/MozLoopService.jsm");
-
-
 }
 
 function install(data, reason) {}

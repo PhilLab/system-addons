@@ -5,6 +5,7 @@ content/modules/MozLoopWorker.js
 # https://github.com/eslint/espree/issues/125
 content/modules/MozLoopAPI.jsm
 bootstrap.js
+content/preferences/prefs.js
 # Libs we don't need to check
 content/panels/vendor
 content/shared/vendor
