@@ -735,8 +735,13 @@ function startup(data, reason)
   // load stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"]
                           .getService(Components.interfaces.nsIStyleSheetService);
-  let styleSheetURI = Services.io.newURI("chrome://loop/skin/toolbar.css", null, null);
-  styleSheetService.loadAndRegisterSheet(styleSheetURI, styleSheetService.USER_SHEET);
+  let sheets = ["chrome://loop/content/addon/css/loop.css",
+                "chrome://loop/skin/platform.css"];
+  for (let sheet of sheets) {
+    let styleSheetURI = Services.io.newURI(sheet, null, null);
+    styleSheetService.loadAndRegisterSheet(styleSheetURI,
+                                           styleSheetService.USER_SHEET);
+  }
 }
 
 function shutdown(data, reason)
@@ -767,9 +772,14 @@ function shutdown(data, reason)
   // unload stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"]
                           .getService(Components.interfaces.nsIStyleSheetService);
-  let styleSheetURI = Services.io.newURI("chrome://loop/skin/toolbar.css", null, null);
-  if (styleSheetService.sheetRegistered(styleSheetURI, styleSheetService.USER_SHEET)) {
-    styleSheetService.unregisterSheet(styleSheetURI, styleSheetService.USER_SHEET);
+  let sheets = ["chrome://loop/content/addon/css/loop.css",
+                "chrome://loop/skin/platform.css"];
+  for (let sheet of sheets) {
+    let styleSheetURI = Services.io.newURI(sheet, null, null);
+    if (styleSheetService.sheetRegistered(styleSheetURI,
+                                          styleSheetService.USER_SHEET))
+      styleSheetService.unregisterSheet(styleSheetURI,
+                                        styleSheetService.USER_SHEET);
   }
 
   // unload modules

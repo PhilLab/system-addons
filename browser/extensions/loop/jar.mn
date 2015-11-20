@@ -44,6 +44,9 @@
   content/panels/js/roomViews.js              (content/panels/js/roomViews.js)
   content/panels/js/feedbackViews.js          (content/panels/js/feedbackViews.js)
 
+  # Add-on styls
+  content/addon/css/loop.css                  (content/addon/css/loop.css)
+
   # Desktop styles
   content/panels/css/panel.css                (content/panels/css/panel.css)
 
