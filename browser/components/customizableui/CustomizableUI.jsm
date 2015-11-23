@@ -205,6 +205,10 @@ var CustomizableUIInternal = {
       "bookmarks-menu-button",
       "downloads-button",
       "home-button",
+      // Although Loop is now a system add-on, we still need to define this
+      // here, so that the default placement is correct, and the customise
+      // defaults are restored correctly.
+      "loop-button"
     ];
 
     // Insert the Pocket button after the bookmarks button if it's present.
