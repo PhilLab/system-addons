@@ -774,7 +774,7 @@ function startup(data, reason)
   for (let sheet of sheets) {
     let styleSheetURI = Services.io.newURI(sheet, null, null);
     styleSheetService.loadAndRegisterSheet(styleSheetURI,
-                                           styleSheetService.USER_SHEET);
+                                           styleSheetService.AUTHOR_SHEET);
   }
 }
 

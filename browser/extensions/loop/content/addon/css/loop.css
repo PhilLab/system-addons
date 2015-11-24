@@ -4,6 +4,16 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @-moz-document url("chrome://browser/content/browser.xul") {
 
+  /*
+     XXX Copied from browser/themes/<platform>/browser.css. Should really be
+     changing the sizes of icons in files to 16px x 16px and no borders.
+   */
+  :-moz-any(toolbar, .widget-overflow-list) #loop-button > .toolbarbutton-icon,
+  :-moz-any(toolbar, .widget-overflow-list) #loop-button > :-moz-any(.toolbarbutton-menubutton-button, .toolbarbutton-badge-stack) > .toolbarbutton-icon {
+    max-width: 18px;
+    margin: 0;
+  }
+
   #loop-button {
     list-style-image: url(chrome://loop/skin/toolbar.png);
     -moz-image-region: rect(0, 18px, 18px, 0);
@@ -183,40 +193,39 @@
       list-style-image: url(chrome://browser/skin/webRTC-sharingScreen-menubar@2x.png);
     }
   }
-}
 
-chatbox[src^="about:loopconversation#"] > .chat-titlebar {
-  background-color: #00a9dc;
-  border-color: #00a9dc;
-}
+  chatbox[src^="about:loopconversation#"] > .chat-titlebar {
+    background-color: #00a9dc;
+    border-color: #00a9dc;
+  }
 
-chatbox[src^="about:loopconversation#"] .chat-title {
-  color: white;
-}
+  chatbox[src^="about:loopconversation#"] .chat-title {
+    color: white;
+  }
 
-chatbox[src^="about:loopconversation#"] .chat-minimize-button {
-  list-style-image: url("chrome://browser/skin/social/chat-icons.svg#minimize-white");
-}
+  chatbox[src^="about:loopconversation#"] .chat-minimize-button {
+    list-style-image: url("chrome://browser/skin/social/chat-icons.svg#minimize-white");
+  }
 
-chatbox[src^="about:loopconversation#"] .chat-swap-button {
-  list-style-image: url("chrome://browser/skin/social/chat-icons.svg#expand-white");
-}
+  chatbox[src^="about:loopconversation#"] .chat-swap-button {
+    list-style-image: url("chrome://browser/skin/social/chat-icons.svg#expand-white");
+  }
 
-.chat-loop-hangup {
-  list-style-image: url("chrome://browser/skin/social/chat-icons.svg#exit-white");
-  background-color: #d13f1a;
-  border: 1px solid #d13f1a;
-  border-top-right-radius: 4px;
-  width: 32px;
-  height: 26px;
-  margin-top: -6px;
-  margin-bottom: -5px;
-  -moz-margin-start: 6px;
-  -moz-margin-end: -5px;
-}
+  .chat-loop-hangup {
+    list-style-image: url("chrome://browser/skin/social/chat-icons.svg#exit-white");
+    background-color: #d13f1a;
+    border: 1px solid #d13f1a;
+    border-top-right-radius: 4px;
+    width: 32px;
+    height: 26px;
+    margin-top: -6px;
+    margin-bottom: -5px;
+    -moz-margin-start: 6px;
+    -moz-margin-end: -5px;
+  }
 
-.chat-toolbarbutton.chat-loop-hangup:-moz-any(:hover,:hover:active) {
-  background-color: #ef6745;
-  border-color: #ef6745;
+  .chat-toolbarbutton.chat-loop-hangup:-moz-any(:hover,:hover:active) {
+    background-color: #ef6745;
+    border-color: #ef6745;
+  }
 }
-
