@@ -6,8 +6,11 @@
 
 FINAL_TARGET = 'dist/bin/browser/features/loop@test.mozilla.org'
 
+FINAL_TARGET_FILES += [
+ 'bootstrap.js'
+]
+
 DIST_FILES += [
-  'bootstrap.js',
   'install.rdf'
 ]
 
