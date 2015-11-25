@@ -875,7 +875,7 @@ loop.panel = (function(_, mozL10n) {
       return (
         <div className="error-content">
           <header className="error-title">
-            <img src="loop/shared/img/sad_hello_icon_64x64.svg" />
+            <img src="shared/img/sad_hello_icon_64x64.svg" />
             <p className="error-subheader">
               {mozL10n.get("e10s_not_supported_subheading", {
                 brandShortname: mozL10n.get("clientShortname2")

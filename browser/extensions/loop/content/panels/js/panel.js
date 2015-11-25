@@ -875,7 +875,7 @@ loop.panel = (function(_, mozL10n) {
       return (
         React.createElement("div", {className: "error-content"}, 
           React.createElement("header", {className: "error-title"}, 
-            React.createElement("img", {src: "loop/shared/img/sad_hello_icon_64x64.svg"}), 
+            React.createElement("img", {src: "shared/img/sad_hello_icon_64x64.svg"}), 
             React.createElement("p", {className: "error-subheader"}, 
               mozL10n.get("e10s_not_supported_subheading", {
                 brandShortname: mozL10n.get("clientShortname2")
