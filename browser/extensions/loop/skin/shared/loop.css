@@ -82,6 +82,42 @@
     #loop-button:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) {
       -moz-image-region: rect(0, 252px, 36px, 216px);
     }
+
+    #loop-button[cui-areatype="menu-panel"],
+    toolbarpaletteitem[place="palette"] > #loop-button {
+      list-style-image: url(chrome://loop/skin/menuPanel@2x.png);
+      -moz-image-region: rect(0, 64px, 64px, 0);
+    }
+
+    /* Make sure that the state icons are not shown in the customization palette. */
+    toolbarpaletteitem[place="palette"] > #loop-button {
+      -moz-image-region: rect(0, 64px, 64px, 0) !important;
+    }
+
+    #loop-button[cui-areatype="menu-panel"][state="disabled"],
+    #loop-button[cui-areatype="menu-panel"][disabled="true"] {
+      -moz-image-region: rect(0, 128px, 64px, 64px);
+    }
+
+    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"] {
+      -moz-image-region: rect(0, 192px, 64px, 128px);
+    }
+
+    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"] {
+      -moz-image-region: rect(0, 256px, 64px, 192px);
+    }
+
+    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]) {
+      -moz-image-region: rect(0, 320px, 64px, 256px);
+    }
+
+    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"] {
+      -moz-image-region: rect(0, 384px, 64px, 320px);
+    }
+
+    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) {
+      -moz-image-region: rect(0, 448px, 64px, 384px);
+    }
   }
 
   @media not all and (min-resolution: 1.1dppx) {
@@ -121,77 +157,6 @@
       -moz-image-region: rect(0, 224px, 32px, 192px);
     }
 
-  }
-
-  /* Menu panel and palette styles */
-  @media (min-resolution: 1.1dppx) {
-    #loop-button[cui-areatype="menu-panel"],
-    toolbarpaletteitem[place="palette"] > #loop-button {
-      list-style-image: url(chrome://loop/skin/menuPanel@2x.png);
-      -moz-image-region: rect(0, 64px, 64px, 0);
-    }
-
-    /* Make sure that the state icons are not shown in the customization palette. */
-    toolbarpaletteitem[place="palette"] > #loop-button {
-      -moz-image-region: rect(0, 64px, 64px, 0) !important;
-    }
-
-    #loop-button[cui-areatype="menu-panel"][state="disabled"],
-    #loop-button[cui-areatype="menu-panel"][disabled="true"] {
-      -moz-image-region: rect(0, 128px, 64px, 64px);
-    }
-
-    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"] {
-      -moz-image-region: rect(0, 192px, 64px, 128px);
-    }
-
-    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"] {
-      -moz-image-region: rect(0, 256px, 64px, 192px);
-    }
-
-    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]) {
-      -moz-image-region: rect(0, 320px, 64px, 256px);
-    }
-
-    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"] {
-      -moz-image-region: rect(0, 384px, 64px, 320px);
-    }
-
-    #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) {
-      -moz-image-region: rect(0, 448px, 64px, 384px);
-    }
-
-    #loop-button > .toolbarbutton-icon,
-    #loop-button > .toolbarbutton-badge-stack > .toolbarbutton-icon,
-    #loop-button > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
-      max-width: 18px;
-    }
-  }
-
-  /* Help 16px icons fit: */
-  toolbar .toolbarbutton-1:not(#loop-button) > .toolbarbutton-icon {
-    margin: 2px;
-  }
-
-  /* Loop/ Hello browser styles */
-
-  notification[value="loop-sharing-notification"] .notification-button {
-    padding: 1px 5px;
-  }
-
-  notification[value="loop-sharing-notification"] .button-menubutton-button {
-    -moz-appearance: none;
-    min-width: 0;
-    margin: 0;
-  }
-
-  notification[value="loop-sharing-notification"] .messageImage {
-    list-style-image: url(chrome://browser/skin/webRTC-sharingScreen-menubar.png);
-  }
-  @media (min-resolution: 2dppx) {
-    notification[value="loop-sharing-notification"] .messageImage {
-      list-style-image: url(chrome://browser/skin/webRTC-sharingScreen-menubar@2x.png);
-    }
   }
 
   chatbox[src^="about:loopconversation#"] > .chat-titlebar {
