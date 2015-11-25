@@ -7,6 +7,7 @@
 % skin loop classic/1.0 %skin/linux/ os=Linux
 % skin loop classic/1.0 %skin/osx/ os=Darwin
 % skin loop classic/1.0 %skin/windows/ os=WINNT
+% skin loop-shared classic/1.0 %skin/shared/
 % override chrome://loop/skin/menuPanel.png       chrome://loop/skin/menuPanel-yosemite.png       os=Darwin osversion>=10.10
 % override chrome://loop/skin/menuPanel@2x.png    chrome://loop/skin/menuPanel-yosemite@2x.png    os=Darwin osversion>=10.10
 % override chrome://loop/skin/toolbar.png         chrome://loop/skin/toolbar-yosemite.png         os=Darwin osversion>=10.10
@@ -44,9 +45,6 @@
   content/panels/js/roomStore.js              (content/panels/js/roomStore.js)
   content/panels/js/roomViews.js              (content/panels/js/roomViews.js)
   content/panels/js/feedbackViews.js          (content/panels/js/feedbackViews.js)
-
-  # Add-on styls
-  content/addon/css/loop.css                  (content/addon/css/loop.css)
 
   # Desktop styles
   content/panels/css/panel.css                (content/panels/css/panel.css)

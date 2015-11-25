@@ -769,7 +769,7 @@ function startup(data, reason)
   // load stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"]
                           .getService(Components.interfaces.nsIStyleSheetService);
-  let sheets = ["chrome://loop/content/addon/css/loop.css",
+  let sheets = ["chrome://loop-shared/skin/loop.css",
                 "chrome://loop/skin/platform.css"];
   for (let sheet of sheets) {
     let styleSheetURI = Services.io.newURI(sheet, null, null);
