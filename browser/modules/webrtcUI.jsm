@@ -887,7 +887,7 @@ function updateBrowserSpecificIndicator(aBrowser, aState) {
       mm.sendAsyncMessage("webrtc:StopSharing", windowId);
     },
     dismiss: true
-  }
+  };
   let secondaryActions = [{
     label: stringBundle.getString("getUserMedia.continueSharing.label"),
     accessKey: stringBundle.getString("getUserMedia.continueSharing.accesskey"),
