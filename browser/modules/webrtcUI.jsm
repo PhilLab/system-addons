@@ -869,12 +869,6 @@ function updateBrowserSpecificIndicator(aBrowser, aState) {
   let windowId = aState.windowId;
   let notification; // Used by action callbacks.
   let mainAction = {
-    label: stringBundle.getString("getUserMedia.continueSharing.label"),
-    accessKey: stringBundle.getString("getUserMedia.continueSharing.accesskey"),
-    callback: function () {},
-    dismiss: true
-  };
-  let secondaryActions = [{
     label: stringBundle.getString("getUserMedia.stopSharing.label"),
     accessKey: stringBundle.getString("getUserMedia.stopSharing.accesskey"),
     callback: function () {
@@ -891,7 +885,13 @@ function updateBrowserSpecificIndicator(aBrowser, aState) {
       }
       let mm = notification.browser.messageManager;
       mm.sendAsyncMessage("webrtc:StopSharing", windowId);
-    }
+    },
+    dismiss: true
+  }
+  let secondaryActions = [{
+    label: stringBundle.getString("getUserMedia.continueSharing.label"),
+    accessKey: stringBundle.getString("getUserMedia.continueSharing.accesskey"),
+    callback: function () {}
   }];
   let options = {
     hideNotNow: true,
